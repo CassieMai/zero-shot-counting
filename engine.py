@@ -18,6 +18,8 @@ def train_one_epoch(model: torch.nn.Module, criterion: torch.nn.Module,
     loss_sum = 0
     loss_counting = 0
     loss_contrast = 0
+    
+    print('dataloader length ', len(data_loader))
 
     for idx, sample in enumerate(data_loader):
         img, patches, targets, file_name = sample

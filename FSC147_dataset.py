@@ -110,17 +110,17 @@ class FSC147Dataset(Dataset):
         self.main_transform = main_transform
         self.query_transform = query_transform
         self.min_size = min_size
-        self.max_size = max_size 
+        self.max_size = max_size
         
         # load annotations for the entire dataset
-        annotation_file = os.path.join(self.data_dir, 'annotation_FSC147_384.json')
-        image_classes_file = os.path.join(self.data_dir, 'ImageClasses_FSC147.txt')
+        annotation_file = os.path.join(self.data_dir, 'FSC_147/annotation_FSC_147_384.json')
+        image_classes_file = os.path.join(self.data_dir, 'FSC_147/ImageClasses_FSC_147.txt')
                 
         self.image_classes = get_image_classes(image_classes_file)
         with open(annotation_file) as f:
             self.annotations = json.load(f)
-        self.rpn_anno = np.load('box_rpn_all.npy', allow_pickle=True).item() 
-        self.sel_anno = np.load('box_rpn_sel_all.npy', allow_pickle=True).item()
+        # self.rpn_anno = np.load('box_rpn_all.npy', allow_pickle=True).item() 
+        # self.sel_anno = np.load('box_rpn_sel_all.npy', allow_pickle=True).item()
         # store images and generate ground truths
         self.images = {}
         self.targets = {}
@@ -287,6 +287,7 @@ def build_dataset(cfg, is_train):
     main_transform = MainTransform()
     query_transform = get_query_transforms(is_train, cfg.DATASET.exemplar_size)
     if is_train: 
+        print('===', cfg.DATASET.list_train)
         data_list = cfg.DATASET.list_train
     else:
         if not cfg.VAL.evaluate_only:

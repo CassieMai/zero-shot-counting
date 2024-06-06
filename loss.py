@@ -74,6 +74,7 @@ class TrainingLoss(nn.Module):
 def get_loss(cfg):
     # get counting loss
     if cfg.TRAIN.counting_loss == 'l1loss':
+        print('device available ', torch.cuda.is_available())
         counting_loss = L1Loss(device=cfg.TRAIN.device, reduction='mean', downsampling_rate=cfg.DATASET.downsampling_rate)
     elif cfg.TRAIN.counting_loss == 'l2loss':
         counting_loss = L2Loss(device=cfg.TRAIN.device, reduction='mean', downsampling_rate=cfg.DATASET.downsampling_rate)

@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 from config import cfg
 import util.misc as utils
@@ -20,6 +20,9 @@ from models import build_model
 import matplotlib.pyplot as plt
 plt.switch_backend('agg')
 
+from memory_profiler import profile
+
+@profile
 def main(args):
     print(args)
     device = torch.device(cfg.TRAIN.device)
@@ -59,9 +62,9 @@ def main(args):
     # define dataset
     dataset_train = build_dataset(cfg, is_train=True)
     dataset_val = build_dataset(cfg, is_train=False)
-  # define dataset
-    dataset_train = build_dataset(cfg, is_train=True)
-    dataset_val = build_dataset(cfg, is_train=False)
+#   # define dataset
+#     dataset_train = build_dataset(cfg, is_train=True)
+#     dataset_val = build_dataset(cfg, is_train=False)
 
     data_loader_train = DataLoader(dataset_train, batch_size=cfg.TRAIN.batch_size, collate_fn=batch_collate_fn, shuffle=True, num_workers=cfg.TRAIN.num_workers)
     data_loader_val = DataLoader(dataset_val, batch_size=1, shuffle=False, collate_fn=batch_collate_fn)

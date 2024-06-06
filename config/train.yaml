@@ -1,13 +1,13 @@
 DIR:
-  dataset: "./FSC147_384_V2"
+  dataset: "/data/maixiaochun/FSC"
   exp: "bmnet+_ep3_epoch300_no_refiner"
-  snapshot: "./checkpoints"
+  snapshot: "/data/maixiaochun/zero-shot-counting/checkpoints"
 
 DATASET:
   name: "FSC147"
-  list_train: "./FSC147_384_V2/train.txt"
-  list_val: "./FSC147_384_V2/val.txt"
-  list_test: "./FSC147_384_V2/test.txt"
+  list_train: "/data/maixiaochun/FSC/FSC_147/train.txt"
+  list_val: "/data/maixiaochun/FSC/FSC_147/val.txt"
+  list_test: "/data/maixiaochun/FSC/FSC_147/test.txt"
   exemplar_number: 3
   downsampling_rate: 1
 
@@ -36,7 +36,7 @@ TRAIN:
   contrast_weight: 5e-6
   optimizer: "AdamW"
   device: "cuda:0"
-  batch_size: 8
+  batch_size: 1
   epochs: 300
   lr_backbone: 1e-5
   lr: 1e-5
@@ -44,7 +44,7 @@ TRAIN:
   momentum: 0.95
   weight_decay: 5e-4
   clip_max_norm: 0.1
-  num_workers: 1
+  num_workers: 4
   seed: 42
 
 VAL:
